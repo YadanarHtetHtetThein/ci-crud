@@ -43,6 +43,10 @@ $routes->get('/users-edit/(:num)', 'UserController::edit/$1');
 $routes->post('/users-update', 'UserController::update');
 $routes->get('/users-delete/(:num)', 'UserController::delete/$1');
 
+$routes->match(['get', 'post'], '/first-form', 'Site::firstForm');
+$routes->match(['get','post'], '/second-form', 'Site::secondForm');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

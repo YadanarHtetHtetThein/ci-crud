@@ -2,8 +2,8 @@
 
 namespace App\Database\Seeds;
 
-use Faker\Factory;
 use CodeIgniter\Database\Seeder;
+use Faker\Factory;
 
 class ProductSeeder extends Seeder
 {
