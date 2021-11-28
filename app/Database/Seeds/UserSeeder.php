@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         return [
             'name' => $faker->name(),
             'email' => $faker->email(),
+            'phone_no'=> $faker->phoneNumber,
         ];
     }
 }

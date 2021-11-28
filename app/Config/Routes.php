@@ -46,6 +46,7 @@ $routes->get('/users-delete/(:num)', 'UserController::delete/$1');
 $routes->match(['get', 'post'], '/first-form', 'Site::firstForm');
 $routes->match(['get','post'], '/second-form', 'Site::secondForm');
 
+$routes->match(['get','post'],'/my-form','User::myForm');
 
 /*
  * --------------------------------------------------------------------
