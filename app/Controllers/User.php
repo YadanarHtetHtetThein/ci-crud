@@ -7,13 +7,32 @@ use App\Controllers\BaseController;
 
 class User extends BaseController
 {
-    public function index()
-    {
-        //
-    }
     public function myForm(){
+        helper(['form']);
         if($this->request->getMethod() == 'post'){
-    
+            $rules = [
+            "name" => "required|min_length[3]|max_length[40]",
+            "email" => "required|valid_email",
+            "phone_no" => "required|min_length[9]|max_length[15]",
+            "profile_image" => [
+                "rules" => "uploaded[profile_image]|max_size[profile_image,1024]|is_image[profile_image]|mime_in[profile_image,image/jpg,image/jpeg,image/gif,image/png]",
+                "label" => "Profile Image",
+            ],
+            "gender" => "in_list[male, female]",
+            ];
+            $messages = [
+                'name' => [
+                    'required' => 'Name is required ',
+                    'min_length' => 'Minimum length of name is at least 3'
+                ],
+            ];
+
+    if (!$this->validate($rules,$messages)) {
+
+      return view("my-form", [
+        "validation" => $this->validator,
+      ]);
+    } else {
             $file = $this->request->getFile('profile_image');
             $file_type = $file->getClientMimeType();
             $valid_file_types = array('image/png','image/jpeg','image/jpg');
@@ -45,6 +64,7 @@ class User extends BaseController
         $data = $userModel->findAll();
         return view('index',['users'=>$data]);
     }
+}
     return view('my-form');
         
     }
