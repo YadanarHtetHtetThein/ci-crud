@@ -49,6 +49,13 @@ $routes->match(['get','post'], '/second-form', 'Site::secondForm');
 
 $routes->match(['get','post'],'/my-form','User::myForm');
 
+$routes->get('/dashboard','Dashboard::index',['filter'=>'AuthCheck']);
+
+$routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes){
+    $routes->get('/auth','Auth::index');
+    $routes->get('/auth/register','Auth::register');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
