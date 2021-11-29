@@ -20,11 +20,8 @@ class User extends BaseController
             $session = session();
 
             if(in_array($file_type, $valid_file_types)){
-                $profile_image = $file->getName();
-            
-
-            if($file->move('images','profile_image')){
-                $file->move('images','profile_image');
+                $profile_image = uniqid().'_'.$file->getName();
+            if($file->move('images',$profile_image)){
                 $userModel = new UserModel();
 
                 $data = [
