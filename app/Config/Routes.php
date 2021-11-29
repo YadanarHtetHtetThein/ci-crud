@@ -35,6 +35,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/controller1', 'Controller1::index');
+$routes->get('/image-delete/(:num)','User::delete/$1');
 
 $routes->get('/users-list', 'UserController::index');
 $routes->get('/users-create', 'UserController::create');

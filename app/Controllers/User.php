@@ -42,9 +42,21 @@ class User extends BaseController
         }else{
             $session->setFlashdata('error','Invalid file type selected');
         }
-        return redirect()->to(base_url());
+        $data = $userModel->findAll();
+        return view('index',['users'=>$data]);
     }
     return view('my-form');
         
+    }
+
+    public function delete($id){
+        $userModel = new UserModel();
+        $image_file = $userModel->select('profile_image')->where('id',$id)->first();
+        $filename = '.'.$image_file['profile_image'];
+        if(file_exists($filename)){
+            unlink($filename);
+        }
+        $userModel->where('id',$id)->delete();
+        return redirect()->to(base_url());
     }
 }
